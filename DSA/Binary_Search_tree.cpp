@@ -5,6 +5,7 @@
 // tree might be empty
 
 #include<iostream>
+#include<queue>
 using namespace std;
 
 struct BstNode{
@@ -34,6 +35,25 @@ BstNode* GetNewNode(int data){ //creating a new node for the new node
   newNode->data = data;
   newNode->left = newNode->right = NULL;
   return newNode; //returns address of this new ndoe to be stored
+}
+void Inorder(BstNode* root){
+  if(root == NULL) return;
+  Inorder(root->left);
+  cout<<root->data<<" ";
+  Inorder(root ->right);
+
+}
+void LevelOrder(BstNode* root){ //using queue FIFO
+  if(root == NULL) return;
+  queue<BstNode*> Q;
+  Q.push(root);
+  while(!Q.empty()){
+    BstNode* current = Q.front();
+    cout<<root->data<<" ";
+    if(current->left != NULL) Q.push(current->left);
+    if(current->right != NULL) Q.push(current->right);
+    Q.pop();
+  }
 }
 
 BstNode* Insert(BstNode* root, int data){ //passing the address of root with ** or just the value with *
